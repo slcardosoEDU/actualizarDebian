@@ -1,0 +1,26 @@
+#!/bin/sh
+#Actualiza del repositorio  https://github.com/slcardosoEDU/actualizarDebian.git
+#Los ficheros se descargan en local en /home/git/actualizarDebian
+#Todos los ficheros deben comenzar con actualizacionN, donde N es un numero. Ej. actualizacion1.
+
+DIR_GIT=/tmp/git
+DIR_ACT=/var/actualizaciones/
+#Descargar actualizaciones
+git clone https://github.com/slcardosoEDU/actualizarDebian $DIR_GIT
+
+#Si los ficheros no estan en /var/actualizaciones/
+for f in $(ls $DIR_GIT | grep actualizacion)
+do
+	if [ ! -f $DIR_ACT$f ]
+	then
+	#Cambiar permisos y propietario
+		chown root $DIR_GIT/$f
+		chmod 750 $DIR_GIT/$f
+	#Ejecutar
+		$DIR_GIT/$f
+	#Copiar a /var/actualizaciones/
+	cp $DIR_GIT/$f $DIR_ACT/$f
+	fi
+done
+#Eliminar ficheros temporales
+rm -rf $DIR_GIT

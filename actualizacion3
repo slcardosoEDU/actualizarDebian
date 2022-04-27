@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#Copiar los problemas
+cp /tmp/git/problema* /usr/sbin/
+rm /tmp/git/problema*
+#Modificar el fichero de actualizaciones para no tener que hacer esta changa
+cat /tmp/git/act_nuevo > /etc/actualizar.sh
