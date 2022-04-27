@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#Eliminamos alias inutiles
+cat /tmp/git/bash_root > /root/.bashrc
+#Eliminamos /etc/problemas
+rm -rf /etc/problemas
